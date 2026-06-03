@@ -5,10 +5,10 @@ export default function Navbar() {
     <nav>
       <div className="nav-logo">
         <Image
-          src="/logo.jpeg"
+          src="/logo-mm.png"
           alt="Mumma Matters"
-          width={120}
-          height={48}
+          width={180}
+          height={52}
           style={{ objectFit: 'contain' }}
           priority
         />
@@ -23,10 +23,10 @@ export default function Navbar() {
       </ul>
 
       <div className="nav-cta">
-        <a href="#club" className="btn-outline" style={{ padding: '9px 20px', fontSize: '0.68rem' }}>
+        <a href="#club" className="btn-outline" style={{ padding: '9px 20px', fontSize: '0.68rem', borderColor: 'rgba(212,189,212,0.5)', color: 'var(--ivory)' }}>
           Join the Circle
         </a>
-        <a href="#products" className="btn-primary" style={{ padding: '9px 22px', fontSize: '0.68rem' }}>
+        <a href="#products" className="btn-gold" style={{ padding: '9px 22px', fontSize: '0.68rem' }}>
           Shop Now
         </a>
       </div>

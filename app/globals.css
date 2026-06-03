@@ -114,18 +114,18 @@ p  { font-family: var(--sans); font-size: 0.95rem; color: var(--plum-mid); line-
 /* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(243, 232, 227, 0.96);
+  background: rgba(45, 21, 48, 0.97);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(200, 164, 106, 0.2);
   padding: 0 40px;
   height: 70px;
   display: flex; align-items: center; justify-content: space-between;
 }
-.nav-logo img { height: 42px; }
+.nav-logo img { height: 52px; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
 .nav-links a {
   font-family: var(--sans); font-size: 0.72rem; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--plum);
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ivory);
   text-decoration: none; transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--gold); }

@@ -79,6 +79,14 @@ export default function Footer() {
         </p>
         <span className="footer-tagline">Because You Do 💜</span>
       </div>
+
+      {/* Developer credit */}
+      <div style={{ textAlign: 'center', paddingTop: '20px', borderTop: '1px solid rgba(200,164,106,0.08)', maxWidth: 'var(--max)', margin: '0 auto' }}>
+        <p style={{ fontSize: '0.7rem', color: 'rgba(212,189,212,0.3)', fontFamily: 'var(--sans)' }}>
+          Designed &amp; Developed by <span style={{ color: 'rgba(200,164,106,0.5)' }}>Tanya Singh Bhatnagar</span>
+        </p>
+      </div>
+
     </footer>
   )
 }
