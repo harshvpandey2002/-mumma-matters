@@ -57,7 +57,7 @@ nav {
   display: flex; align-items: center; justify-content: space-between;
 }
 .nav-logo { display: flex; align-items: center; }
-.nav-logo img { height: 200px; margin-top: 30px; width: auto; }
+.nav-logo img { height: 200px; margin-top: auto; width: 350px; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
 .nav-links a { font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: white; text-decoration: none; transition: color 0.2s; }
 .nav-links a:hover { color: var(--gold); }
@@ -293,11 +293,11 @@ footer { background: var(--plum-dark); border-top: 1px solid rgba(200, 164, 106,
 
 /* ── RESPONSIVE — 900px ── */
 @media (max-width: 900px) {
-  .nav-logo img { width: 160px; height: auto; }
-  nav { padding: 0 20px; }
+  .nav-logo img { width: 350px; height: auto; margin-bottom: 20px; margin-top: 20px; }
+  nav { padding: 0 20px; justify-content: center; position: relative; }
   .nav-links { display: none; }
   .nav-cta { display: none; }
-  .nav-hamburger { display: flex; }
+  .nav-hamburger { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); display: flex; }
   .nav-mobile { visibility: visible; }
   .nav-mobile.is-open { max-height: 440px; }
 

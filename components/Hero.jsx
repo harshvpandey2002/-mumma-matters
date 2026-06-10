@@ -40,10 +40,10 @@ export default function Hero() {
             <span className="proof-num">100%</span>
             <span className="proof-label">Safe for<br />breastfeeding</span>
           </div>
-          <div className="proof-item">
+          {/* <div className="proof-item">
             <span className="proof-num">1L+</span>
             <span className="proof-label">Mothers in our<br />community</span>
-          </div>
+          </div> */}
         </div>
       </div>
 

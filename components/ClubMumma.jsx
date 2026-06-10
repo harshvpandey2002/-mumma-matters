@@ -38,7 +38,7 @@ export default function ClubMumma() {
         </div>
 
         <a
-          href="https://wa.me/919XXXXXXXXX?text=Hi%2C%20I%20want%20to%20join%20Club%20Mumma%20Matters%20%F0%9F%92%9C"
+         href="https://chat.whatsapp.com/IoShr91atAu5p8MFEhgH79"
           className="club-btn"
           target="_blank"
           rel="noopener noreferrer"

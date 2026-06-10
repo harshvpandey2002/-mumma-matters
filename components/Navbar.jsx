@@ -42,7 +42,7 @@ export default function Navbar() {
 
         <div className="nav-cta">
           <a href="#club" className="btn-outline" style={{ padding: '9px 20px', fontSize: '0.68rem' }}>
-            Join the Circle
+            Join Club MM
           </a>
           <a href="#products" className="btn-primary" style={{ padding: '9px 22px', fontSize: '0.68rem' }}>
             Shop Now
@@ -70,7 +70,7 @@ export default function Navbar() {
         </ul>
         <div className="nav-mobile-cta">
           <a href="#club" className="btn-outline" onClick={() => setOpen(false)}>
-            Join the Circle
+            Join CLub MM
           </a>
           <a href="#products" className="btn-primary" onClick={() => setOpen(false)}>
             Shop Now
