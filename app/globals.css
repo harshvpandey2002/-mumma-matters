@@ -86,7 +86,7 @@ nav {
 /* ── MOBILE MENU ── */
 .nav-mobile {
   position: fixed; top: 80px; left: 0; right: 0;
-  background: var(--plum-dark); border-bottom: 1px solid rgba(200,164,106,0.2);
+  background: var(--plum-dark); 
   z-index: 99; overflow: hidden; max-height: 0;
   transition: max-height 0.38s ease;
   visibility: hidden; /* hidden on desktop entirely */
