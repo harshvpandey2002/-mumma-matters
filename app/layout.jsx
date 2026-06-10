@@ -1,4 +1,5 @@
 import './globals.css'
+import ScrollInit from '@/components/ScrollInit'
 
 export const metadata = {
   title: 'Mumma Matters — Postpartum Recovery Supplements for Indian Mothers | Because You Do',
@@ -79,7 +80,10 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <ScrollInit />
+        {children}
+      </body>
     </html>
   )
 }

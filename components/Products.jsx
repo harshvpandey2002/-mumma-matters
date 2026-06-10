@@ -217,7 +217,7 @@ export default function Products() {
               <>
                 <h4 style={{ fontFamily: 'var(--serif)', color: 'var(--plum)', marginBottom: '6px' }}>You&rsquo;re in. We&rsquo;ll let you know first. 💜</h4>
                 <p style={{ fontSize: '0.85rem', color: 'var(--plum-mid)', marginBottom: '20px' }}>Leave your email and we&rsquo;ll notify you before anyone else.</p>
-                <div style={{ display: 'flex', gap: '0', maxWidth: '480px', margin: '0 auto' }}>
+                <div className="email-capture-row" style={{ display: 'flex', gap: '0', maxWidth: '480px', margin: '0 auto' }}>
                   <input
                     type="email" value={email} onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
