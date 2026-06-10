@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import GoldRule from './GoldRule'
 
 const CREDENTIALS = [
   {
@@ -31,7 +30,6 @@ export default function ForDoctors() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    // TODO: POST to /api/doctor-enquiry when backend is ready
     setSubmitted(true)
   }
 
@@ -41,8 +39,13 @@ export default function ForDoctors() {
         <div className="gynaec-grid">
 
           <div className="gynaec-left">
-            <span className="sec-label">For Gynaecologists &amp; Doctors</span>
-            <GoldRule />
+            {/* Left-aligned label and divider */}
+            <span className="sec-label" style={{ textAlign: 'left' }}>For Gynaecologists &amp; Doctors</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '1.2rem 0' }}>
+              <div style={{ width: '60px', height: '1px', background: 'var(--gold)' }}></div>
+              <div style={{ width: '7px', height: '7px', background: 'var(--gold)', transform: 'rotate(45deg)', flexShrink: 0 }}></div>
+              <div style={{ width: '60px', height: '1px', background: 'var(--gold)' }}></div>
+            </div>
             <h2 id="gynaec-heading">
               Built with doctors,<br />not just around them.
             </h2>
@@ -72,18 +75,13 @@ export default function ForDoctors() {
           <div>
             <div className="gynaec-form-card">
               <h3>Share Your Clinical Input</h3>
-              <p>
-                We are building Mumma Matters with doctors, not just around them.
-                Your input directly shapes the formulation.
-              </p>
+              <p>We are building Mumma Matters with doctors, not just around them. Your input directly shapes the formulation.</p>
 
               {submitted ? (
                 <div style={{ textAlign: 'center', padding: '40px 0' }}>
                   <div style={{ fontSize: '2rem', marginBottom: '12px' }}>💜</div>
                   <h4 style={{ color: 'var(--ivory)', fontFamily: 'var(--serif)', marginBottom: '8px' }}>Thank you, Doctor.</h4>
-                  <p style={{ color: 'rgba(212,189,212,0.7)', fontSize: '0.88rem' }}>
-                    We&rsquo;ll send you the complete clinical dossier within 24 hours.
-                  </p>
+                  <p style={{ color: 'rgba(212,189,212,0.7)', fontSize: '0.88rem' }}>We&rsquo;ll send you the complete clinical dossier within 24 hours.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit}>
@@ -114,16 +112,11 @@ export default function ForDoctors() {
                   </div>
                   <div className="form-field">
                     <label htmlFor="message">Your Clinical Input or Question</label>
-                    <textarea
-                      id="message"
-                      placeholder="Share your thoughts on the formulation, a question about a specific ingredient, or interest in the advisory board..."
-                      value={form.message}
-                      onChange={handleChange}
-                    />
+                    <textarea id="message" placeholder="Share your thoughts on the formulation..." value={form.message} onChange={handleChange} />
                   </div>
                   <button type="submit" className="form-submit">Send Clinical Input</button>
                   <p style={{ fontSize: '0.7rem', color: 'rgba(212,189,212,0.4)', marginTop: '14px', textAlign: 'center' }}>
-                    We will send a complete clinical dossier with your response.<br />No sales calls. No spam.
+                    We will send a complete clinical dossier with your response. No sales calls. No spam.
                   </p>
                 </form>
               )}

@@ -10,30 +10,18 @@ const SKU_NAMES = {
 }
 
 const voteButtonBase = {
-  width: '100%',
-  padding: '11px',
-  background: 'transparent',
-  border: '1px solid var(--plum)',
-  color: 'var(--plum)',
-  fontFamily: 'var(--sans)',
-  fontSize: '0.72rem',
-  fontWeight: '600',
-  letterSpacing: '0.1em',
-  textTransform: 'uppercase',
-  cursor: 'pointer',
-  transition: 'all 0.3s',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: '8px',
+  width: '100%', padding: '11px', background: 'transparent',
+  border: '1px solid var(--plum)', color: 'var(--plum)',
+  fontFamily: 'var(--sans)', fontSize: '0.72rem', fontWeight: '600',
+  letterSpacing: '0.1em', textTransform: 'uppercase', cursor: 'pointer',
+  transition: 'all 0.3s', display: 'flex', alignItems: 'center',
+  justifyContent: 'center', gap: '8px',
 }
 
 const voteButtonVoted = {
   ...voteButtonBase,
-  background: 'var(--gold)',
-  borderColor: 'var(--gold)',
-  color: 'var(--plum-dark)',
-  cursor: 'default',
+  background: 'var(--gold)', borderColor: 'var(--gold)',
+  color: 'var(--plum-dark)', cursor: 'default',
 }
 
 export default function Products() {
@@ -46,8 +34,7 @@ export default function Products() {
 
   function handleVote(sku) {
     if (voted[sku]) return
-    const newVotes = { ...votes, [sku]: votes[sku] + 1 }
-    setVotes(newVotes)
+    setVotes({ ...votes, [sku]: votes[sku] + 1 })
     setVoted({ ...voted, [sku]: true })
     setShowSummary(true)
     setTimeout(() => {
@@ -57,13 +44,12 @@ export default function Products() {
 
   function handleEmailSubmit() {
     if (!email || !email.includes('@')) return
-    // TODO: POST to /api/subscribe when backend is ready
     setEmailSubmitted(true)
   }
 
-  const totalVotes = votes.conceive + votes.nursing + votes.rebuild
-  const maxVotes   = Math.max(votes.conceive, votes.nursing, votes.rebuild)
-  const topSku     = maxVotes > 0 ? Object.keys(votes).find(k => votes[k] === maxVotes) : null
+  const totalVotes  = votes.conceive + votes.nursing + votes.rebuild
+  const maxVotes    = Math.max(votes.conceive, votes.nursing, votes.rebuild)
+  const topSku      = maxVotes > 0 ? Object.keys(votes).find(k => votes[k] === maxVotes) : null
   const topSkuShort = topSku ? SKU_NAMES[topSku].split(' ')[1] : '—'
 
   return (
@@ -73,12 +59,11 @@ export default function Products() {
         <div className="section-header">
           <span className="sec-label">Our Formulas</span>
           <GoldRule />
-          <h2 id="products-heading">Three formulas.<br />One complete journey.</h2>
+          <h2 id="products-heading">Three formulas.<br />One complete new motherhood journey.</h2>
         </div>
 
         <p className="products-intro-line">
-          Each formula is a daily powder sachet — dissolve in warm water or milk.
-          No horse-sized tablets. No guesswork.
+          Each formula is a daily powder sachet — dissolve in warm water or milk. No horse-sized tablets.
         </p>
 
         <div className="products-grid">
@@ -101,9 +86,6 @@ export default function Products() {
                 health and cortisol regulation — so your body is truly ready to conceive. Rooted in
                 Ayurveda. Backed by clinical science.
               </p>
-              <div className="product-footer">
-                <div className="product-price">₹1,299 <span>/ month</span></div>
-              </div>
               <div style={{ marginTop: '14px' }}>
                 <button
                   onClick={() => handleVote('conceive')}
@@ -113,7 +95,7 @@ export default function Products() {
                   <span>{voted.conceive ? '✓ You\'re in!' : '✋ I want this — count me in'}</span>
                 </button>
                 {votes.conceive > 0 && (
-                  <div style={{ textAlign: 'center', fontSize: '0.72rem', color: 'var(--gold)', marginTop: '8px', minHeight: '18px', fontFamily: 'var(--sans)' }}>
+                  <div style={{ textAlign: 'center', fontSize: '0.72rem', color: 'var(--gold)', marginTop: '8px', fontFamily: 'var(--sans)' }}>
                     {votes.conceive} {votes.conceive === 1 ? 'mumma wants this' : 'mummas want this'}
                   </div>
                 )}
@@ -141,9 +123,6 @@ export default function Products() {
                 addressing the three things that matter most: milk supply, hair fall, and the quiet work
                 of feeling like yourself again. 100% safe for breastfeeding. OB-GYN reviewed.
               </p>
-              <div className="product-footer">
-                <div className="product-price">₹999 <span>/ month</span></div>
-              </div>
               <div style={{ marginTop: '14px' }}>
                 <button
                   onClick={() => handleVote('nursing')}
@@ -153,7 +132,7 @@ export default function Products() {
                   <span>{voted.nursing ? '✓ You\'re in!' : '✋ I want this — count me in'}</span>
                 </button>
                 {votes.nursing > 0 && (
-                  <div style={{ textAlign: 'center', fontSize: '0.72rem', color: 'var(--gold)', marginTop: '8px', minHeight: '18px', fontFamily: 'var(--sans)' }}>
+                  <div style={{ textAlign: 'center', fontSize: '0.72rem', color: 'var(--gold)', marginTop: '8px', fontFamily: 'var(--sans)' }}>
                     {votes.nursing} {votes.nursing === 1 ? 'mumma wants this' : 'mummas want this'}
                   </div>
                 )}
@@ -179,9 +158,6 @@ export default function Products() {
                 recover. A daily powder sachet to reset hormones, restore hair growth, revive skin,
                 and return the energy and confidence pregnancy quietly took away.
               </p>
-              <div className="product-footer">
-                <div className="product-price">₹1,299 <span>/ month</span></div>
-              </div>
               <div style={{ marginTop: '14px' }}>
                 <button
                   onClick={() => handleVote('rebuild')}
@@ -191,7 +167,7 @@ export default function Products() {
                   <span>{voted.rebuild ? '✓ You\'re in!' : '✋ I want this — count me in'}</span>
                 </button>
                 {votes.rebuild > 0 && (
-                  <div style={{ textAlign: 'center', fontSize: '0.72rem', color: 'var(--gold)', marginTop: '8px', minHeight: '18px', fontFamily: 'var(--sans)' }}>
+                  <div style={{ textAlign: 'center', fontSize: '0.72rem', color: 'var(--gold)', marginTop: '8px', fontFamily: 'var(--sans)' }}>
                     {votes.rebuild} {votes.rebuild === 1 ? 'mumma wants this' : 'mummas want this'}
                   </div>
                 )}
@@ -201,12 +177,9 @@ export default function Products() {
 
         </div>
 
-        {/* ── Pre-order summary panel ── */}
+        {/* Vote summary */}
         {showSummary && (
-          <div
-            ref={summaryRef}
-            style={{ marginTop: '40px', background: 'var(--plum-dark)', padding: '40px', textAlign: 'center', border: '1px solid rgba(200,164,106,0.2)' }}
-          >
+          <div ref={summaryRef} style={{ marginTop: '40px', background: 'var(--plum-dark)', padding: '40px', textAlign: 'center', border: '1px solid rgba(200,164,106,0.2)' }}>
             <span className="sec-label" style={{ color: 'var(--gold)' }}>Pre-Order Interest</span>
             <h3 style={{ fontFamily: 'var(--serif)', color: 'var(--ivory)', margin: '8px 0 6px' }}>
               Mummas are already raising their hands.
@@ -216,78 +189,45 @@ export default function Products() {
             </p>
             <div style={{ display: 'flex', gap: '0', justifyContent: 'center', flexWrap: 'wrap' }}>
               <div style={{ padding: '20px 40px', borderRight: '1px solid rgba(200,164,106,0.15)' }}>
-                <span style={{ fontFamily: 'var(--serif)', fontSize: '2.8rem', color: 'var(--gold)', display: 'block', lineHeight: '1' }}>
-                  {totalVotes}
-                </span>
-                <span style={{ fontSize: '0.68rem', fontFamily: 'var(--sans)', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(212,189,212,0.5)' }}>
-                  Total hands raised
-                </span>
+                <span style={{ fontFamily: 'var(--serif)', fontSize: '2.8rem', color: 'var(--gold)', display: 'block', lineHeight: '1' }}>{totalVotes}</span>
+                <span style={{ fontSize: '0.68rem', fontFamily: 'var(--sans)', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(212,189,212,0.5)' }}>Total hands raised</span>
               </div>
               <div style={{ padding: '20px 40px', borderRight: '1px solid rgba(200,164,106,0.15)' }}>
-                <span style={{ fontFamily: 'var(--serif)', fontSize: '2.8rem', color: 'var(--gold)', display: 'block', lineHeight: '1' }}>
-                  {topSkuShort}
-                </span>
-                <span style={{ fontSize: '0.68rem', fontFamily: 'var(--sans)', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(212,189,212,0.5)' }}>
-                  Most wanted formula
-                </span>
+                <span style={{ fontFamily: 'var(--serif)', fontSize: '2.8rem', color: 'var(--gold)', display: 'block', lineHeight: '1' }}>{topSkuShort}</span>
+                <span style={{ fontSize: '0.68rem', fontFamily: 'var(--sans)', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(212,189,212,0.5)' }}>Most wanted formula</span>
               </div>
               <div style={{ padding: '20px 40px' }}>
-                <span style={{ fontFamily: 'var(--serif)', fontSize: '2.8rem', color: 'var(--gold)', display: 'block', lineHeight: '1' }}>
-                  Free
-                </span>
-                <span style={{ fontSize: '0.68rem', fontFamily: 'var(--sans)', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(212,189,212,0.5)' }}>
-                  First month for early voters
-                </span>
+                <span style={{ fontFamily: 'var(--serif)', fontSize: '2.8rem', color: 'var(--gold)', display: 'block', lineHeight: '1' }}>Free</span>
+                <span style={{ fontSize: '0.68rem', fontFamily: 'var(--sans)', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(212,189,212,0.5)' }}>First month for early voters</span>
               </div>
-            </div>
-            <div style={{ marginTop: '24px', paddingTop: '20px', borderTop: '1px solid rgba(200,164,106,0.12)' }}>
-              <p style={{ fontSize: '0.78rem', color: 'rgba(212,189,212,0.5)', fontStyle: 'italic' }}>
-                We&rsquo;ll notify you the moment your formula is ready to ship.
-                No payment needed. No commitment.
-              </p>
             </div>
           </div>
         )}
 
-        {/* ── Email capture ── */}
+        {/* Email capture */}
         {showSummary && (
           <div style={{ marginTop: '24px', background: 'var(--blush)', padding: '32px 40px', border: '1px solid rgba(212,189,212,0.3)', textAlign: 'center' }}>
             {emailSubmitted ? (
               <div style={{ padding: '20px', textAlign: 'center' }}>
                 <div style={{ fontSize: '2rem', marginBottom: '10px' }}>💜</div>
-                <h4 style={{ fontFamily: 'var(--serif)', color: 'var(--plum)', marginBottom: '6px' }}>
-                  You&rsquo;re on the early access list.
-                </h4>
-                <p style={{ fontSize: '0.85rem', color: 'var(--plum-mid)' }}>
-                  We&rsquo;ll email you the moment your formula is ready to ship. You deserve to be first.
-                </p>
+                <h4 style={{ fontFamily: 'var(--serif)', color: 'var(--plum)', marginBottom: '6px' }}>You&rsquo;re on the early access list.</h4>
+                <p style={{ fontSize: '0.85rem', color: 'var(--plum-mid)' }}>We&rsquo;ll email you the moment your formula is ready to ship.</p>
               </div>
             ) : (
               <>
-                <h4 style={{ fontFamily: 'var(--serif)', color: 'var(--plum)', marginBottom: '6px' }}>
-                  You&rsquo;re in. We&rsquo;ll let you know first. 💜
-                </h4>
-                <p style={{ fontSize: '0.85rem', color: 'var(--plum-mid)', marginBottom: '20px' }}>
-                  Leave your email and we&rsquo;ll notify you before anyone else when your formula is ready.
-                </p>
+                <h4 style={{ fontFamily: 'var(--serif)', color: 'var(--plum)', marginBottom: '6px' }}>You&rsquo;re in. We&rsquo;ll let you know first. 💜</h4>
+                <p style={{ fontSize: '0.85rem', color: 'var(--plum-mid)', marginBottom: '20px' }}>Leave your email and we&rsquo;ll notify you before anyone else.</p>
                 <div style={{ display: 'flex', gap: '0', maxWidth: '480px', margin: '0 auto' }}>
                   <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type="email" value={email} onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
                     style={{ flex: '1', padding: '13px 18px', border: '1px solid rgba(79,45,79,0.3)', borderRight: 'none', fontFamily: 'var(--sans)', fontSize: '0.88rem', background: 'white', color: 'var(--plum)', outline: 'none' }}
                   />
-                  <button
-                    onClick={handleEmailSubmit}
-                    style={{ padding: '13px 24px', background: 'var(--plum)', color: 'var(--ivory)', fontFamily: 'var(--sans)', fontSize: '0.72rem', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'background 0.2s' }}
-                  >
+                  <button onClick={handleEmailSubmit}
+                    style={{ padding: '13px 24px', background: 'var(--plum)', color: 'var(--ivory)', fontFamily: 'var(--sans)', fontSize: '0.72rem', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>
                     Notify Me
                   </button>
                 </div>
-                <p style={{ fontSize: '0.65rem', color: 'var(--plum-mid)', marginTop: '10px', opacity: '0.6' }}>
-                  No spam. No sales calls. Just a single &ldquo;it&rsquo;s ready&rdquo; email.
-                </p>
               </>
             )}
           </div>

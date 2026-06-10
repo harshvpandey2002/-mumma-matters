@@ -49,7 +49,7 @@ export default function Blogs() {
           <h2 id="blogs-heading">
             Know what&rsquo;s happening<br />in your body.
           </h2>
-          <p>Written by OB-GYNs, lactation consultants and nutritionists. No wellness fluff. Only evidence.</p>
+          <p>Written by OB-GYNs, lactation consultants and nutritionists.</p>
         </div>
 
         <div className="blogs-grid">

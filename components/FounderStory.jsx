@@ -53,7 +53,7 @@ export default function FounderStory() {
             <p>This is not another wellness brand. This is a mother talking to mothers.</p>
 
             <div className="founder-signature">
-              <span className="founder-name">[Founder Name]</span>
+              <span className="founder-name">Tanya Singh</span>
               <span className="founder-title">Founder, Mumma Matters · Mother · Delhi</span>
             </div>
           </div>

@@ -4,7 +4,6 @@ import FounderStory from '@/components/FounderStory'
 import Products from '@/components/Products'
 import WhyMummaMatters from '@/components/WhyMummaMatters'
 import HowItWorks from '@/components/HowItWorks'
-import Ingredients from '@/components/Ingredients'
 import ClubMumma from '@/components/ClubMumma'
 import ForDoctors from '@/components/ForDoctors'
 import Testimonials from '@/components/Testimonials'
@@ -22,7 +21,6 @@ export default function HomePage() {
         <Products />
         <WhyMummaMatters />
         <HowItWorks />
-        <Ingredients />
         <ClubMumma />
         <ForDoctors />
         <Testimonials />
