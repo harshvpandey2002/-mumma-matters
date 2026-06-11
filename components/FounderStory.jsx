@@ -6,17 +6,14 @@ export default function FounderStory() {
       <div className="container">
         <div className="founder-grid">
 
-          <div className="founder-image-wrap">
-            <div className="founder-img-frame">
-              <p style={{ fontFamily: 'var(--serif)', color: 'rgba(212,189,212,0.4)', textAlign: 'center', padding: '40px', fontStyle: 'italic' }}>
-                [Replace with founder portrait — natural light, authentic, not studio-polished]
-              </p>
-              <div className="founder-img-caption">
-                &ldquo;I just wanted to be happy enough<br />to be a happy mother.&rdquo;
-              </div>
-            </div>
-          </div>
-
+         <video
+  src="https://res.cloudinary.com/dddbrkjqo/video/upload/q_auto,f_auto/IMG_6193_z1ptrm.mp4"
+  autoPlay
+  muted
+  loop
+  playsInline
+  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+/>
           <div className="founder-body">
             <span className="sec-label">The Founder&rsquo;s Story</span>
             <GoldRule />
