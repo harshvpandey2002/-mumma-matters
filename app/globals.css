@@ -313,6 +313,12 @@ footer { background: var(--plum-dark); border-top: 1px solid rgba(200, 164, 106,
   .blogs-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   section { padding: 70px 24px; }
+  .proof-item { flex: 0 1 48%; }
+  .gynaec-left .sec-label,
+.founder-body .sec-label {
+  text-align: center;
+  display: block;
+}
 }
 
 /* ── RESPONSIVE — 480px ── */
@@ -352,4 +358,20 @@ footer { background: var(--plum-dark); border-top: 1px solid rgba(200, 164, 106,
   .email-capture-row { flex-direction: column !important; }
   .email-capture-row input { border-right: 1px solid rgba(79,45,79,0.3) !important; border-bottom: none !important; }
   .email-capture-row button { width: 100%; }
+  /* .proof-item { flex: 0 1 48%; } */
+  .hero-proof { justify-content: center; }
+  .founder-body, .gynaec-left {
+  text-align: center;
+}
+.founder-pull-quote::before {
+  display: none;
+}
+.founder-signature {
+  text-align: left;
+}
+.gynaec-left .sec-label,
+.founder-body .sec-label {
+  text-align: center;
+  display: block;
+}
 }

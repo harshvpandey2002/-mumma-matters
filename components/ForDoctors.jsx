@@ -40,11 +40,12 @@ export default function ForDoctors() {
 
           <div className="gynaec-left">
             {/* Left-aligned label and divider */}
-            <span className="sec-label" style={{ textAlign: 'left' }}>For Gynaecologists &amp; Doctors</span>
+            <span className="sec-label">For Gynaecologists &amp; Doctors</span>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '1.2rem 0' }}>
-              <div style={{ width: '60px', height: '1px', background: 'var(--gold)' }}></div>
+              <div className="doc-divider" style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '1.2rem 0' }}></div>
+              {/* <div style={{ width: '60px', height: '1px', background: 'var(--gold)' }}></div>
               <div style={{ width: '7px', height: '7px', background: 'var(--gold)', transform: 'rotate(45deg)', flexShrink: 0 }}></div>
-              <div style={{ width: '60px', height: '1px', background: 'var(--gold)' }}></div>
+              <div style={{ width: '60px', height: '1px', background: 'var(--gold)' }}></div> */}
             </div>
             <h2 id="gynaec-heading">
               Built with doctors,<br />not just around them.
