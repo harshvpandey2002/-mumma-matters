@@ -1,45 +1,24 @@
-import GoldRule from './GoldRule'
+'use client'
 
-const BLOG_POSTS = [
-  {
-    cat: 'Hair Fall',
-    meta: 'Dr. [Name] · OB-GYN · 5 min read',
-    title: 'Why Your Hair Falls Out 3 Months After Delivery — And What Actually Stops It',
-    excerpt: 'Postpartum telogen effluvium peaks at 3–5 months and affects up to 90% of Indian mothers. Here\'s the difference between what helps and what\'s just marketing.',
-  },
-  {
-    cat: 'Hormones',
-    meta: 'Nutritionist [Name] · 7 min read',
-    title: 'The Postpartum Hormone Crash Is Real — And Your Indian Diet Probably Isn\'t Fixing It',
-    excerpt: 'Estrogen and progesterone drop by 90% within 48 hours of delivery. Here\'s what that actually means for your body — and the nutrients that help your hormones recover.',
-  },
-  {
-    cat: 'Breastfeeding',
-    meta: 'Lactation Consultant [Name] · IBCLC · 6 min read',
-    title: 'Shatavari and Breast Milk Supply — What the 2022 Indian Clinical Trial Actually Found',
-    excerpt: 'A double-blind Indian RCT confirmed what Ayurveda has known for centuries. Here\'s what the study actually said — and the dose that matters.',
-  },
-  {
-    cat: 'Fertility',
-    meta: 'Dr. [Name] · Reproductive Endocrinologist · 8 min read',
-    title: 'PCOS and Trying to Conceive: Why Myo-Inositol at the 40:1 Ratio Changes Everything',
-    excerpt: 'The 40:1 ratio of Myo-Inositol to D-Chiro-Inositol is the most clinically studied intervention for PCOS fertility. Most Indian supplements get the ratio completely wrong.',
-  },
-  {
-    cat: 'Postpartum Depression',
-    meta: 'Dr. [Name] · Psychiatrist · 6 min read',
-    title: '1 in 5 Indian Mothers Have Postpartum Depression. Most Go Undiagnosed. Here\'s Why.',
-    excerpt: 'Postpartum depression in India is vastly under-reported, under-diagnosed and under-treated. The silence around it is costing mothers and babies both.',
-  },
-  {
-    cat: 'Nutrition',
-    meta: 'Nutritionist [Name] · RD · 5 min read',
-    title: "The Indian Vegetarian Mother's Postpartum Deficiency Problem — And the Nutrients Nobody Prescribes",
-    excerpt: 'B12, DHA, Choline, and Iron deficiencies are epidemic among vegetarian Indian mothers postpartum. Here\'s the evidence — and why your methi laddoos alone aren\'t enough.',
-  },
-]
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import GoldRule from './GoldRule'
+import { getContent } from '../lib/api'
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
 
 export default function Blogs() {
+  const [posts, setPosts]   = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/blogs?limit=6`)
+      .then(r => r.json())
+      .then(data => setPosts(data.data || []))
+      .catch(() => setPosts([]))
+      .finally(() => setLoading(false))
+  }, [])
+
   return (
     <section className="blogs" id="blogs" aria-labelledby="blogs-heading">
       <div className="container">
@@ -53,24 +32,47 @@ export default function Blogs() {
         </div>
 
         <div className="blogs-grid">
-          {BLOG_POSTS.map((post) => (
-            <div key={post.title} className="blog-card">
-              <div className="blog-image">
-                <span className="blog-cat">{post.cat}</span>
-                <p className="blog-img-text">[Feature image]</p>
+          {loading ? (
+            [1, 2, 3].map(i => (
+              <div key={i} className="blog-card" style={{ opacity: 0.4 }}>
+                <div className="blog-image" style={{ background: 'rgba(212,189,212,0.1)' }} />
+                <div className="blog-body">
+                  <div style={{ background: 'rgba(212,189,212,0.1)', height: '12px', width: '40%', borderRadius: '4px', marginBottom: '10px' }} />
+                  <div style={{ background: 'rgba(212,189,212,0.1)', height: '20px', width: '90%', borderRadius: '4px', marginBottom: '8px' }} />
+                  <div style={{ background: 'rgba(212,189,212,0.1)', height: '60px', borderRadius: '4px' }} />
+                </div>
               </div>
-              <div className="blog-body">
-                <div className="blog-meta">{post.meta}</div>
-                <h3 className="blog-title">{post.title}</h3>
-                <p className="blog-excerpt">{post.excerpt}</p>
-                <a href="#" className="blog-read">Read Article →</a>
+            ))
+          ) : posts.length === 0 ? (
+            <p style={{ color: 'var(--plum-mid)', gridColumn: '1/-1', textAlign: 'center', padding: '40px 0' }}>
+              Expert articles coming soon.
+            </p>
+          ) : (
+            posts.map((post) => (
+              <div key={post._id} className="blog-card">
+                <div className="blog-image" style={{ background: post.thumbnail ? 'transparent' : undefined }}>
+                  {post.thumbnail ? (
+                    <img src={post.thumbnail} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ) : (
+                    <p className="blog-img-text">[Feature image]</p>
+                  )}
+                  <span className="blog-cat">{post.category}</span>
+                </div>
+                <div className="blog-body">
+                  <div className="blog-meta">{post.author} · {post.readTime} min read</div>
+                  <h3 className="blog-title">{post.title}</h3>
+                  <p className="blog-excerpt">{post.excerpt}</p>
+                  <Link href={`/blog/${post.slug}`} className="blog-read">
+                    Read Article →
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
         <div className="blogs-cta">
-          <a href="#" className="btn-outline">Read All Expert Articles</a>
+          <Link href="/blog" className="btn-outline">Read All Expert Articles</Link>
         </div>
       </div>
     </section>

@@ -57,7 +57,7 @@ nav {
   display: flex; align-items: center; justify-content: space-between;
 }
 .nav-logo { display: flex; align-items: center; }
-.nav-logo img { height: 200px; margin-top: auto; width: 350px; }
+.nav-logo img { height: 120px; margin-top: auto; width: 140px; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
 .nav-links a { font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: white; text-decoration: none; transition: color 0.2s; }
 .nav-links a:hover { color: var(--gold); }

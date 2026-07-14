@@ -1,24 +1,24 @@
-import GoldRule from './GoldRule'
+'use client'
 
-const TESTIMONIALS = [
-  {
-    text: 'I was shedding so much hair at 4 months postpartum that I stopped washing it every day out of fear. Six weeks on the Nursing Formula and I can finally see regrowth at my hairline. I cried when I noticed it.',
-    name: 'Priya R.',
-    detail: '4 months postpartum · Delhi NCR · Nursing Formula',
-  },
-  {
-    text: 'My gynaec actually asked what I was taking when she saw my blood reports. My ferritin had gone from 8 to 34 in two months. I told her about Mumma Matters and she was genuinely impressed by the formulation.',
-    name: 'Sneha M.',
-    detail: '7 months postpartum · Bengaluru · Nursing Formula',
-  },
-  {
-    text: 'After weaning I felt like my body was in complete hormonal chaos — mood swings, fatigue, skin that looked ten years older. The Rebuild Formula is the first thing I\'ve tried in 18 months of postpartum that actually made me feel like myself again.',
-    name: 'Ananya K.',
-    detail: '18 months postpartum · Mumbai · Rebuild Formula',
-  },
+import { useState, useEffect } from 'react'
+import GoldRule from './GoldRule'
+import { getContent } from '../lib/api'
+
+const FALLBACK = [
+  { text: 'Loading testimonials...', name: '', detail: '' },
 ]
 
 export default function Testimonials() {
+  const [items, setItems]   = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    getContent('testimonials')
+      .then(data => setItems(data.items || []))
+      .catch(() => setItems(FALLBACK))
+      .finally(() => setLoading(false))
+  }, [])
+
   return (
     <section className="testimonials" aria-labelledby="testi-heading">
       <div className="container">
@@ -31,16 +31,30 @@ export default function Testimonials() {
         </div>
 
         <div className="testi-grid">
-          {TESTIMONIALS.map((t) => (
-            <div key={t.name} className="testi-card">
-              <span className="testi-quote">&ldquo;</span>
-              <div className="testi-stars">★★★★★</div>
-              <p className="testi-text">{t.text}</p>
-              <div className="testi-divider"></div>
-              <div className="testi-name">{t.name}</div>
-              <div className="testi-detail">{t.detail}</div>
-            </div>
-          ))}
+          {loading ? (
+            // skeleton
+            [1, 2, 3].map(i => (
+              <div key={i} className="testi-card" style={{ opacity: 0.4 }}>
+                <span className="testi-quote">&ldquo;</span>
+                <div className="testi-stars">★★★★★</div>
+                <p className="testi-text" style={{ background: 'rgba(212,189,212,0.1)', height: '80px', borderRadius: '4px' }} />
+                <div className="testi-divider" />
+                <div style={{ background: 'rgba(212,189,212,0.1)', height: '16px', width: '60%', borderRadius: '4px', marginBottom: '6px' }} />
+                <div style={{ background: 'rgba(212,189,212,0.1)', height: '12px', width: '80%', borderRadius: '4px' }} />
+              </div>
+            ))
+          ) : (
+            items.map((t, i) => (
+              <div key={i} className="testi-card">
+                <span className="testi-quote">&ldquo;</span>
+                <div className="testi-stars">★★★★★</div>
+                <p className="testi-text">{t.text}</p>
+                <div className="testi-divider"></div>
+                <div className="testi-name">{t.name}</div>
+                <div className="testi-detail">{t.detail}</div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </section>

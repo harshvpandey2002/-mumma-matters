@@ -1,21 +1,26 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import GoldRule from './GoldRule'
+import { getContent } from '../lib/api'
 
-const FEATURES = [
-  'Weekly expert Q&As',
-  'Hair fall & recovery tips',
-  'Hormone health guidance',
-  'Early access to launches',
-  'Members-only discounts',
-  'Founder directly in the group',
-]
-
-const STATS = [
-  { num: '1L+', label: 'Mothers reached' },
-  { num: '600+', label: 'Community members' },
-  { num: '₹0', label: 'Cost to join' },
-]
+const DEFAULT_LINK = 'https://chat.whatsapp.com/IoShr91atAu5p8MFEhgH79'
 
 export default function ClubMumma() {
+  const [data, setData]     = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    getContent('club-mumma')
+      .then(d => setData(d))
+      .catch(() => setData(null))
+      .finally(() => setLoading(false))
+  }, [])
+
+  const features    = data?.features || []
+  const stats       = data?.stats || []
+  const whatsappLink = data?.whatsappLink || DEFAULT_LINK
+
   return (
     <section className="club" id="club" aria-labelledby="club-heading">
       <div className="container">
@@ -32,13 +37,19 @@ export default function ClubMumma() {
         </p>
 
         <div className="club-features">
-          {FEATURES.map((feat) => (
-            <span key={feat} className="club-feat">{feat}</span>
-          ))}
+          {loading ? (
+            [1, 2, 3, 4, 5, 6].map(i => (
+              <span key={i} className="club-feat" style={{ opacity: 0.3, minWidth: '140px', display: 'inline-block' }}>&nbsp;</span>
+            ))
+          ) : (
+            features.map((feat) => (
+              <span key={feat} className="club-feat">{feat}</span>
+            ))
+          )}
         </div>
 
         <a
-         href="https://chat.whatsapp.com/IoShr91atAu5p8MFEhgH79"
+          href={whatsappLink}
           className="club-btn"
           target="_blank"
           rel="noopener noreferrer"
@@ -53,16 +64,25 @@ export default function ClubMumma() {
         </p>
 
         <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(200,164,106,0.15)', display: 'flex', gap: '40px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          {STATS.map((stat) => (
-            <div key={stat.label} style={{ textAlign: 'center' }}>
-              <span style={{ fontFamily: 'var(--serif)', fontSize: '2.5rem', color: 'var(--ivory)', display: 'block', lineHeight: '1' }}>
-                {stat.num}
-              </span>
-              <span style={{ fontSize: '0.7rem', color: 'rgba(212,189,212,0.55)', fontFamily: 'var(--sans)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                {stat.label}
-              </span>
-            </div>
-          ))}
+          {loading ? (
+            [1, 2, 3].map(i => (
+              <div key={i} style={{ textAlign: 'center', opacity: 0.3 }}>
+                <div style={{ background: 'rgba(212,189,212,0.1)', height: '40px', width: '80px', borderRadius: '4px', margin: '0 auto 8px' }} />
+                <div style={{ background: 'rgba(212,189,212,0.1)', height: '12px', width: '100px', borderRadius: '4px' }} />
+              </div>
+            ))
+          ) : (
+            stats.map((stat) => (
+              <div key={stat.label} style={{ textAlign: 'center' }}>
+                <span style={{ fontFamily: 'var(--serif)', fontSize: '2.5rem', color: 'var(--ivory)', display: 'block', lineHeight: '1' }}>
+                  {stat.num}
+                </span>
+                <span style={{ fontSize: '0.7rem', color: 'rgba(212,189,212,0.55)', fontFamily: 'var(--sans)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                  {stat.label}
+                </span>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </section>

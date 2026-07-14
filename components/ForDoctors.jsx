@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { submitDoctorEnquiry } from '../lib/api'
 
 const CREDENTIALS = [
   {
@@ -21,16 +22,44 @@ const CREDENTIALS = [
 ]
 
 export default function ForDoctors() {
-  const [form, setForm] = useState({ name: '', spec: '', city: '', email: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
+  const [form, setForm]     = useState({ name: '', spec: '', city: '', email: '', message: '' })
+  const [status, setStatus] = useState('idle') // idle | loading | success | error
+  const [errMsg, setErrMsg] = useState('')
 
   function handleChange(e) {
     setForm({ ...form, [e.target.id]: e.target.value })
+    setErrMsg('')
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    setSubmitted(true)
+
+    // basic required field check
+    if (!form.name || !form.spec || !form.city || !form.email) {
+      setErrMsg('Please fill in all required fields.')
+      return
+    }
+    if (!form.email.includes('@')) {
+      setErrMsg('Please enter a valid email address.')
+      return
+    }
+
+    setStatus('loading')
+    setErrMsg('')
+
+    try {
+      await submitDoctorEnquiry({
+        fullName:      form.name,
+        specialisation: form.spec,
+        cityHospital:  form.city,
+        email:         form.email,
+        clinicalInput: form.message,
+      })
+      setStatus('success')
+    } catch (err) {
+      setStatus('error')
+      setErrMsg(err.message || 'Something went wrong. Please try again.')
+    }
   }
 
   return (
@@ -39,13 +68,9 @@ export default function ForDoctors() {
         <div className="gynaec-grid">
 
           <div className="gynaec-left">
-            {/* Left-aligned label and divider */}
             <span className="sec-label">For Gynaecologists &amp; Doctors</span>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '1.2rem 0' }}>
               <div className="doc-divider" style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '1.2rem 0' }}></div>
-              {/* <div style={{ width: '60px', height: '1px', background: 'var(--gold)' }}></div>
-              <div style={{ width: '7px', height: '7px', background: 'var(--gold)', transform: 'rotate(45deg)', flexShrink: 0 }}></div>
-              <div style={{ width: '60px', height: '1px', background: 'var(--gold)' }}></div> */}
             </div>
             <h2 id="gynaec-heading">
               Built with doctors,<br />not just around them.
@@ -78,7 +103,7 @@ export default function ForDoctors() {
               <h3>Share Your Clinical Input</h3>
               <p>We are building Mumma Matters with doctors, not just around them. Your input directly shapes the formulation.</p>
 
-              {submitted ? (
+              {status === 'success' ? (
                 <div style={{ textAlign: 'center', padding: '40px 0' }}>
                   <div style={{ fontSize: '2rem', marginBottom: '12px' }}>💜</div>
                   <h4 style={{ color: 'var(--ivory)', fontFamily: 'var(--serif)', marginBottom: '8px' }}>Thank you, Doctor.</h4>
@@ -88,11 +113,11 @@ export default function ForDoctors() {
                 <form onSubmit={handleSubmit}>
                   <div className="form-field">
                     <label htmlFor="name">Full Name</label>
-                    <input type="text" id="name" placeholder="Dr. [Your Name]" value={form.name} onChange={handleChange} />
+                    <input type="text" id="name" placeholder="Dr. [Your Name]" value={form.name} onChange={handleChange} disabled={status === 'loading'} />
                   </div>
                   <div className="form-field">
                     <label htmlFor="spec">Specialisation</label>
-                    <select id="spec" value={form.spec} onChange={handleChange}>
+                    <select id="spec" value={form.spec} onChange={handleChange} disabled={status === 'loading'}>
                       <option value="">Select specialisation</option>
                       <option>Obstetrician / Gynaecologist</option>
                       <option>Lactation Consultant (IBCLC)</option>
@@ -105,17 +130,31 @@ export default function ForDoctors() {
                   </div>
                   <div className="form-field">
                     <label htmlFor="city">City / Hospital</label>
-                    <input type="text" id="city" placeholder="City and hospital name" value={form.city} onChange={handleChange} />
+                    <input type="text" id="city" placeholder="City and hospital name" value={form.city} onChange={handleChange} disabled={status === 'loading'} />
                   </div>
                   <div className="form-field">
                     <label htmlFor="email">Email Address</label>
-                    <input type="email" id="email" placeholder="your@email.com" value={form.email} onChange={handleChange} />
+                    <input type="email" id="email" placeholder="your@email.com" value={form.email} onChange={handleChange} disabled={status === 'loading'} />
                   </div>
                   <div className="form-field">
                     <label htmlFor="message">Your Clinical Input or Question</label>
-                    <textarea id="message" placeholder="Share your thoughts on the formulation..." value={form.message} onChange={handleChange} />
+                    <textarea id="message" placeholder="Share your thoughts on the formulation..." value={form.message} onChange={handleChange} disabled={status === 'loading'} />
                   </div>
-                  <button type="submit" className="form-submit">Send Clinical Input</button>
+
+                  {errMsg && (
+                    <p style={{ fontSize: '0.8rem', color: '#f08080', fontFamily: 'var(--sans)', marginBottom: '12px' }}>
+                      {errMsg}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="form-submit"
+                    disabled={status === 'loading'}
+                    style={{ opacity: status === 'loading' ? 0.7 : 1, cursor: status === 'loading' ? 'not-allowed' : 'pointer' }}
+                  >
+                    {status === 'loading' ? 'Sending…' : 'Send Clinical Input'}
+                  </button>
                   <p style={{ fontSize: '0.7rem', color: 'rgba(212,189,212,0.4)', marginTop: '14px', textAlign: 'center' }}>
                     We will send a complete clinical dossier with your response. No sales calls. No spam.
                   </p>

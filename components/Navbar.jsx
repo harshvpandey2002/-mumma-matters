@@ -25,10 +25,10 @@ export default function Navbar() {
       <nav>
         <div className="nav-logo">
           <Image
-            src="/logo mm 3.png"
+            src="/logo_transparent.png"
             alt="Mumma Matters"
-            width={220}
-            height={65}
+           width={140}
+           height={45}
             style={{ objectFit: 'contain' }}
             priority
           />
